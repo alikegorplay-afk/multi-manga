@@ -15,9 +15,9 @@ _log_format = f"%(asctime)s - [%(levelname)s] - %(name)s - (%(filename)s).%(func
 @dataclass
 class Config:
     DEBUG = os.getenv("DEBUG") == "True"
-    MAX_TRY = int(os.getenv("MAX_TRY")) if os.getenv("MAX_TRY").isdigit() else 3
-    BASE_URL = os.getenv("BASE_URL")
-    MAX_WORKERS = int(os.getenv("MAX_WORKERS")) if os.getenv("MAX_WORKERS").isdigit() else 5
+    MAX_TRY = int(os.getenv("MAX_TRY")) if os.getenv("MAX_TRY") and os.getenv("MAX_TRY").isdigit() else 3
+    BASE_URL = os.getenv("BASE_URL") if os.getenv("BASE_URL") else "https://multi-manga.today"
+    MAX_WORKERS = int(os.getenv("MAX_WORKERS")) if os.getenv("MAX_WORKERS") and os.getenv("MAX_WORKERS").isdigit() else 5
     def logger(self, name: str):
         return LoggerFactory(name)
 
